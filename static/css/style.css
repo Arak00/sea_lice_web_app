@@ -1,0 +1,99 @@
+/* Styles personnalisés pour l'application de détection de poux de mer */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-bottom: none;
+    padding: 1.25rem;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-control, .form-select {
+    border-radius: 5px;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.progress {
+    height: 25px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.alert {
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+footer {
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Styles pour les images */
+img.img-fluid {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+img.img-fluid.rounded.border {
+    border: 1px solid #dee2e6 !important;
+    padding: 5px;
+}
+
+/* Styles pour les résultats */
+.alert-success, .alert-danger {
+    font-weight: bold;
+}
+
+/* Styles responsifs */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+}

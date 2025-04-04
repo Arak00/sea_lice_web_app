@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos | Système de Détection de Poux de Mer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Détection de Poux de Mer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">À propos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="text-center mb-0">À propos du Système de Détection de Poux de Mer</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3>Aperçu du Projet</h3>
+                        <p>
+                            Ce projet implémente une solution de vision par ordinateur pour détecter les infections de poux de mer dans les exploitations d'élevage de saumons. 
+                            Le système utilise des modèles d'apprentissage profond pour analyser les images de saumons et identifier s'ils présentent des signes d'infection par des poux de mer. 
+                            Ce prototype démontre la faisabilité d'automatiser le processus de détection pour améliorer la couverture de surveillance par rapport au processus manuel actuel 
+                            (qui ne contrôle qu'environ 1% des poissons toutes les 24 heures) vers un système automatisé plus complet.
+                        </p>
+
+                        <h3 class="mt-4">Architecture du Système</h3>
+                        <p>Le système se compose des éléments suivants :</p>
+                        <ol>
+                            <li><strong>Module de Traitement des Données</strong> : Gère le prétraitement des images, l'augmentation et l'organisation des ensembles de données</li>
+                            <li><strong>Module de Modèle</strong> : Implémente le transfert d'apprentissage avec ResNet50 et EfficientNet pour la détection des poux de mer</li>
+                            <li><strong>Module d'Inférence</strong> : Fournit des fonctionnalités pour faire des prédictions sur de nouvelles images</li>
+                            <li><strong>Interface Utilisateur</strong> : Offre une application web pour la détection</li>
+                        </ol>
+
+                        <h3 class="mt-4">Détails d'Implémentation</h3>
+                        <h4>Traitement des Données</h4>
+                        <p>
+                            En raison des limitations d'accès à l'ensemble de données SalmonScan original, ce prototype utilise des données synthétiques pour démontrer les fonctionnalités. 
+                            L'ensemble de données synthétiques comprend :
+                        </p>
+                        <ul>
+                            <li>10 images synthétiques de saumons sains</li>
+                            <li>15 images synthétiques de saumons infectés</li>
+                        </ul>
+                        <p>Les images sont prétraitées avec les étapes suivantes :</p>
+                        <ul>
+                            <li>Redimensionnement à 600x250 pixels (comme spécifié dans l'ensemble de données SalmonScan)</li>
+                            <li>Réduction du bruit à l'aide du flou gaussien</li>
+                            <li>Amélioration du contraste à l'aide de CLAHE (Égalisation adaptative d'histogramme avec limitation de contraste)</li>
+                            <li>Augmentation des données (retournements horizontaux/verticaux, rotation)</li>
+                        </ul>
+
+                        <h4 class="mt-4">Architecture du Modèle</h4>
+                        <p>Le prototype implémente deux approches de transfert d'apprentissage :</p>
+                        <ol>
+                            <li>
+                                <strong>Modèle basé sur ResNet50</strong> :
+                                <ul>
+                                    <li>Base ResNet50 pré-entraînée (entraînée sur ImageNet)</li>
+                                    <li>Pooling global moyen</li>
+                                    <li>Normalisation par lots</li>
+                                    <li>Couches denses avec dropout pour la régularisation</li>
+                                    <li>Activation sigmoïde pour la classification binaire</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Modèle basé sur EfficientNet</strong> :
+                                <ul>
+                                    <li>Base EfficientNetB0 pré-entraînée (entraînée sur ImageNet)</li>
+                                    <li>Couches supérieures similaires au modèle ResNet50</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h3 class="mt-4">Limitations et Améliorations Futures</h3>
+                        <h4>Limitations Actuelles</h4>
+                        <ol>
+                            <li><strong>Données Synthétiques</strong> : Le prototype utilise des données synthétiques qui manquent de la complexité et de la variabilité des images réelles de saumons.</li>
+                            <li><strong>Performance du Modèle</strong> : La précision est inférieure à l'objectif en raison des limitations des données.</li>
+                            <li><strong>Vitesse de Traitement</strong> : L'implémentation actuelle n'est pas optimisée pour le traitement vidéo en temps réel.</li>
+                        </ol>
+
+                        <h4 class="mt-4">Améliorations Recommandées</h4>
+                        <ol>
+                            <li><strong>Intégration de Données Réelles</strong> : Remplacer les données synthétiques par l'ensemble de données SalmonScan réel ou d'autres images réelles de saumons.</li>
+                            <li>
+                                <strong>Optimisation du Modèle</strong> : 
+                                <ul>
+                                    <li>Affiner les hyperparamètres avec un ensemble de données plus grand</li>
+                                    <li>Explorer des architectures plus avancées comme YOLOv5 pour la détection d'objets</li>
+                                    <li>Implémenter la quantification du modèle pour une inférence plus rapide</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Amélioration des Fonctionnalités</strong> :
+                                <ul>
+                                    <li>Ajouter des capacités de traitement vidéo</li>
+                                    <li>Implémenter le suivi des poissons individuels à travers les images</li>
+                                    <li>Ajouter la classification de la gravité des infections</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h3 class="mt-4">Conclusion</h3>
+                        <p>
+                            Ce prototype démontre la faisabilité d'utiliser la vision par ordinateur et l'apprentissage profond pour la détection automatisée des poux de mer dans l'élevage de saumons. 
+                            Bien que l'implémentation actuelle présente des limitations dues à l'utilisation de données synthétiques, elle fournit une base solide pour un développement ultérieur avec des données réelles. 
+                            Avec des données réelles et une optimisation supplémentaire, ce système pourrait améliorer considérablement la couverture de surveillance, passant de 1% actuellement à potentiellement 100% des poissons, 
+                            permettant une identification plus rapide des poissons infectés et réduisant la propagation des poux de mer grâce à une intervention précoce.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="text-muted mb-0">Système de Détection de Poux de Mer &copy; 2025</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
